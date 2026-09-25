@@ -1,0 +1,20 @@
+# systemd unit for the Mirchi Events site.
+# Install: sudo cp deploy/mirchi-events.service /etc/systemd/system/
+#          sudo systemctl daemon-reload && sudo systemctl enable --now mirchi-events
+[Unit]
+Description=Mirchi Events (Next.js)
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=mirchi
+WorkingDirectory=/opt/mirchi-events
+EnvironmentFile=/opt/mirchi-events/.env
+Environment=NODE_ENV=production
+Environment=PORT=3000
+ExecStart=/usr/bin/npm start
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

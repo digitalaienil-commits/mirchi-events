@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #111114;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-mirchi: #e31e24;
+  --color-mirchi-dark: #b9151b;
+  --color-mirchi-soft: #fdecec;
+  --color-leaf: #3dae2b;
+  --color-leaf-soft: #eaf7e7;
+  --font-sans: var(--font-poppins);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Admin form controls */
+@layer components {
+  .admin-input {
+    @apply block w-full rounded-xl border border-neutral-200 bg-white px-3.5 py-2.5 text-sm text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-mirchi focus:ring-4 focus:ring-mirchi/10;
+  }
+  .admin-input[aria-invalid="true"] {
+    @apply border-mirchi;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-mirchi px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-mirchi-dark disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-neutral-200 bg-white px-5 py-2.5 text-sm font-semibold text-neutral-800 transition hover:border-neutral-400 disabled:opacity-60;
+  }
+}
