@@ -3,9 +3,10 @@ import { mkdir, readFile, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { del, put } from "@vercel/blob";
 
-// Posters live in Vercel Blob when BLOB_READ_WRITE_TOKEN is set (Vercel deployments),
-// otherwise on the server's disk, served by app/uploads/[name]/route.ts (local dev and VMs).
-const useBlob = Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+// Posters live in Vercel Blob when a Blob store is connected (Vercel deployments), otherwise on the
+// server's disk, served by app/uploads/[name]/route.ts (local dev and VMs). Newer stores connect with
+// BLOB_STORE_ID + Vercel's automatic OIDC token; older ones with BLOB_READ_WRITE_TOKEN.
+const useBlob = Boolean(process.env.BLOB_STORE_ID || process.env.BLOB_READ_WRITE_TOKEN);
 
 export const UPLOAD_DIR = path.resolve(process.env.UPLOAD_DIR || "uploads");
 export const UPLOAD_URL_PREFIX = "/uploads/";
